@@ -1,0 +1,23 @@
+#!/bin/bash
+#PBS -N LiC1Re2
+#PBS -l select=1:ncpus=8:mem=100gb  
+#PBS -l walltime=72:00:00             
+#PBS -q v1_throughput72                                    
+#PBS -j oe                             
+#PBS -m abe
+
+                         
+
+# Load Python 3.11 module
+module load tools/prod
+module load Python/3.11.3-GCCcore-12.3.0
+
+# Activate the virtual environment
+source /rds/general/user/mnazeeru/home/PyBaMM-GEM/env-gem/bin/activate
+
+cd $PBS_O_WORKDIR
+
+export PBS_ARRAY_INDEX=1
+
+# Run the Python script for the specific subset, using 16 cores for parallel trials
+python /rds/general/user/mnazeeru/home/PyBaMM-GEM/wip_asher/Rio_Code/Reservoir/BS/Case_1_Run_further/Full_5Exp_5Ts_AddLi.py
